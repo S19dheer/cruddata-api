@@ -2,9 +2,10 @@ var crudDao = require('../dao/crudDao');
 
 // to select  the collection of database ;
 var databaseCollection = 'restaurant';
+var crudApi = {};
 
 ///  insert data to crud Dao
-exports.insertData = function(request, response) {
+crudApi.insertData = function(request, response) {
     // TO-DO data coming from client then uncomment insertvalue and comment second insertvalue
     /*var insertValue = request.body;*/
     var insertValue = {
@@ -27,7 +28,7 @@ exports.insertData = function(request, response) {
 }
 
 /// delete data on the _id bases
-exports.deleteData = function(request, response) {
+crudApi.deleteData = function(request, response) {
     var deleteValue = request.query;
     crudDao.deleteDataToCrudDao(deleteValue, databaseCollection, function(error, result) {
 
@@ -38,7 +39,7 @@ exports.deleteData = function(request, response) {
 }
 
 /// retrive or get all data
-exports.getData = function(request, response) {
+crudApi.getData = function(request, response) {
     crudDao.retriveDataToCrudDao(databaseCollection, function(error, result) {
 
         response.json({
@@ -48,7 +49,7 @@ exports.getData = function(request, response) {
 }
 
 /// update data on _id bases 
-exports.updateData = function(request, response) {
+crudApi.updateData = function(request, response) {
         var updateValue = request.body;
 
         crudDao.updateDataToCrudDao(updateValue, databaseCollection, function(error, result) {
@@ -60,7 +61,7 @@ exports.updateData = function(request, response) {
         })
     }
     ///TO-DO search data on column bases
-exports.searchData = function(request, response) {
+crudApi.searchData = function(request, response) {
     var searchValue = request.body;
     crudDao.searchDataToCrudDao(searchValue, databaseCollection, function(error, result) {
         response.json({
@@ -68,3 +69,5 @@ exports.searchData = function(request, response) {
         });
     })
 }
+
+module.exports = crudApi;
